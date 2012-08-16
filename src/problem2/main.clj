@@ -8,4 +8,4 @@
 (defn listFibsUpTo [n] (take-while (partial > n) (fibList) ))
 
 (println (listFibsUpTo 4000000))
-(println (reduce + (filter even? (take 32 (listFibsUpTo 4000000)))))
+(println (reduce + (filter even? (listFibsUpTo 4000000))))
