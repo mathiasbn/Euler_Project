@@ -1,9 +1,11 @@
 (ns problem2.main)
 
-(def fibListGenerator (iterate (fn [n] (cons (+ (first n) (second n)) n)) [2 1]))
-(def fibListOf (fn [n] (nth fibListGenerator (- n 2))))
-(def fibNum (fn [n] (first (fibListOf n))))
+;;Stolen fib gen :( (did the empty input myself!!
+(defn fibList
+  ([a b] (lazy-seq (cons a (fibList b (+ b a)))))
+  ([] (fibList 1 2)))
 
-(println (fibListOf 32))
-(println (concat "fib nr 32 is less then 4 mill:" (str (< (fibNum 32) 4000000N))))
+(defn listFibsUpTo [n] (take-while (partial > n) (fibList) ))
 
+(println (listFibsUpTo 4000000))
+(println (reduce + (filter even? (take 32 (listFibsUpTo 4000000)))))
